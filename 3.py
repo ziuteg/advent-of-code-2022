@@ -1,8 +1,8 @@
-
 def calc_priority(i):
     if i.isupper():
         return ord(i) - ord('A') + 27
     return ord(i) - ord('a') + 1
+
 
 def execute1(input):
     result = 0
@@ -26,5 +26,5 @@ def execute2(input):
 
         for i in a.intersection(b, c):
             result += calc_priority(i)
-            
+
     return result

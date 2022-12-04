@@ -9,6 +9,7 @@ SCORES = defaultdict(int, {
     'CX': 6,
 })
 
+
 def execute1(input):
     result = 0
 
@@ -18,6 +19,7 @@ def execute1(input):
         result += SCORES[a + b]
 
     return result
+
 
 MAPPINGS = {
     'AX': 'Z',
@@ -31,6 +33,7 @@ MAPPINGS = {
     'CZ': 'X',
 }
 
+
 def execute2(input):
     result = 0
 
@@ -39,5 +42,5 @@ def execute2(input):
         b = MAPPINGS[a + b]
         result += ord(b) - ord('X') + 1
         result += SCORES[a + b]
-        
+
     return result
