@@ -7,7 +7,7 @@ def contains(a, b, x, y):
 
 
 def overlaps(a, b, x, y):
-    return a <= x <= b or a <= y <= b
+    return a <= y and x <= b
 
 
 def execute1(input):
@@ -28,7 +28,7 @@ def execute2(input):
     for line in input.splitlines():
         a, b = map(get_range, line.split(','))
 
-        if overlaps(*a, *b) or overlaps(*b, *a):
+        if overlaps(*a, *b):
             result += 1
 
     return result
