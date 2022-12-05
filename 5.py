@@ -10,8 +10,8 @@ def parse_input(input):
             if line[i+1] != ' ':
                 stacks[i//4].append(line[i+1])
 
-    for i in range(len(stacks)):
-        stacks[i] = list(reversed(stacks[i]))
+    for stack in stacks:
+        stack.reverse()
 
     ops = ops.replace('move ', '')
     ops = ops.replace(' from ', ',')
