@@ -13,41 +13,38 @@ def dirs():
     return [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
 
-def is_visible(x, y, grid):
+def move(a, b):
+    return tuple(sum(t) for t in zip(a, b))
+
+
+def is_visible(pos, grid):
 
     for dir in dirs():
-        nx, ny = x, y
-        nx += dir[0]
-        ny += dir[1]
+        npos = move(pos, dir)
 
-        while (nx, ny) in grid:
-            if grid[(nx, ny)] >= grid[(x, y)]:
+        while True:
+            if npos not in grid:
+                return 1
+            if grid[npos] >= grid[pos]:
                 break
-            nx += dir[0]
-            ny += dir[1]
-
-        if (nx, ny) not in grid:
-            return 1
+            npos = move(npos, dir)
 
     return 0
 
 
-def dist(x, y, grid):
+def dist(pos, grid):
     result = 1
 
     for dir in dirs():
-        nx, ny = x, y
-        nx += dir[0]
-        ny += dir[1]
+        npos = move(pos, dir)
         d = 0
 
-        while (nx, ny) in grid:
+        while npos in grid:
             d += 1
-            if grid[(nx, ny)] >= grid[(x, y)]:
+            if grid[npos] >= grid[pos]:
                 break
-            nx += dir[0]
-            ny += dir[1]
-    
+            npos = move(npos, dir)
+
         result *= d
 
     return result
@@ -58,8 +55,8 @@ def execute1(input):
 
     result = 0
     for pos in grid.keys():
-        result += is_visible(*pos, grid)
-    
+        result += is_visible(pos, grid)
+
     return result
 
 
@@ -68,6 +65,6 @@ def execute2(input):
 
     result = 0
     for pos in grid.keys():
-        result = max(result, dist(*pos, grid))
-    
+        result = max(result, dist(pos, grid))
+
     return result
