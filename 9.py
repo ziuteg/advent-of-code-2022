@@ -6,11 +6,11 @@ def move_closer(a, b):
 
     if dist > 1:
         return (a[0] + dx, a[1] + dy)
-        
+
     return a
 
 
-def step(rope, dir, T):
+def step(rope, dir):
     nrope = rope.copy()
     head = rope[0]
 
@@ -22,9 +22,6 @@ def step(rope, dir, T):
 
         tail = move_closer(tail, head)
         nrope[i] = tail
-
-        if i == len(rope) - 1:
-            T.add(tail)
 
     return nrope
 
@@ -47,7 +44,8 @@ def solve(input, rope_len):
         T.add(rope[-1])
 
         for _ in range(dist):
-            rope = step(rope, dir, T)
+            rope = step(rope, dir)
+            T.add(rope[-1])
 
     return len(T)
 
