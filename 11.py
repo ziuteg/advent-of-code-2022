@@ -38,7 +38,6 @@ def solve(input, part):
                     monkeys[if_false][0].append(item)
 
             monkeys[monkey_index][0] = []
-
     
     counts.sort()
 
