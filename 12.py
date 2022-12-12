@@ -7,7 +7,6 @@ def bfs(grid, starts, end):
 
     while len(queue) > 0:
         dist, node = queue.popleft()
-        print(f'{dist=}, {node=}')
 
         if node == end:
             return dist
@@ -24,6 +23,8 @@ def bfs(grid, starts, end):
             
             queue.append((dist+1, next))
             visited.add(next)
+
+    return -1
 
 
 def execute1(input):
