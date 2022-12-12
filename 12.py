@@ -2,11 +2,12 @@ from collections import deque
 
 
 def bfs(grid, starts, end):
-    queue = deque(starts)
+    queue = deque([(0, start) for start in starts])
     visited = set(starts)
 
     while len(queue) > 0:
         dist, node = queue.popleft()
+        print(f'{dist=}, {node=}')
 
         if node == end:
             return dist
@@ -33,7 +34,7 @@ def execute1(input):
         for x, item in enumerate(line):
             if item == 'S':
                 grid[(x, y)] = ord('a')
-                starts.append((0, (x, y)))
+                starts.append((x, y))
             elif item == 'E':
                 end = (x, y)
                 grid[(x, y)] = ord('z')
@@ -51,7 +52,7 @@ def execute2(input):
         for x, item in enumerate(line):
             if item == 'S' or item == 'a':
                 grid[(x, y)] = ord('a')
-                starts.append((0, (x, y)))
+                starts.append((x, y))
             elif item == 'E':
                 end = (x, y)
                 grid[(x, y)] = ord('z')
