@@ -34,7 +34,6 @@ def execute1(input):
         b = input[i+1]
 
         if compare(a, b) == 1:
-            print('right', a, b, i//2+1)
             result += i//2+1
 
     return result
