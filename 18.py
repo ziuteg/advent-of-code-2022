@@ -2,6 +2,15 @@ import sys
 sys.setrecursionlimit(10000)
 
 
+def neighbours(pos):
+    for dx in range(-1, 2):
+        for dy in range(-1, 2):
+            for dz in range(-1, 2):
+                if abs(dx) + abs(dy) + abs(dz) != 1:
+                    continue
+                yield (pos[0] + dx, pos[1] + dy, pos[2] + dz)
+
+
 def execute1(input):
     cubes = set()
 
@@ -12,12 +21,10 @@ def execute1(input):
     result = 0
     for cube in cubes:
         result += 6
-        for x in range(-1, 2):
-            for y in range(-1, 2):
-                for z in range(-1, 2):
-                    if (abs(x) + abs(y) + abs(z)) == 1:
-                        if (cube[0] + x, cube[1] + y, cube[2] + z) in cubes:
-                            result -= 1
+        
+        for next_cube in neighbours(cube):
+            if next_cube in cubes:
+                result -= 1
 
     return result
 
@@ -33,18 +40,11 @@ def dfs(pos, cubes, visited, limit):
     visited.add(pos)
 
     result = 0
-    for dx in range(-1, 2):
-        for dy in range(-1, 2):
-            for dz in range(-1, 2):
-                next_pos = (pos[0] + dx, pos[1] + dy, pos[2] + dz)
+    for next_pos in neighbours(pos):
+        if next_pos in cubes:
+            result += 1
 
-                if sum([abs(pos[i] - next_pos[i]) for i in range(len(pos))]) != 1:
-                    continue
-
-                if next_pos in cubes:
-                    result += 1
-
-                result += dfs(next_pos, cubes, visited, limit)
+        result += dfs(next_pos, cubes, visited, limit)
 
     return result
 
