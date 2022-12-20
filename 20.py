@@ -84,7 +84,6 @@ def read_input(input, key=1):
 
 
 def mix(nodes):
-    start = None
     for node in nodes:
         if node.val == 0:
             start = node
@@ -97,7 +96,6 @@ def mix(nodes):
             offset = node.val % (len(nodes)-1)
 
         node.shift(offset)
-    return start
 
 
 def execute1(input):
